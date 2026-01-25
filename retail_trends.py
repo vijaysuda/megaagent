@@ -5,6 +5,7 @@ Retail Trends Analyzer
 A comprehensive tool for analyzing retail sales data and identifying trends.
 """
 
+import argparse
 import json
 import csv
 from datetime import datetime
@@ -193,8 +194,6 @@ class RetailTrendsAnalyzer:
 
 def main():
     """Main function to run the retail trends analyzer."""
-    import argparse
-    
     parser = argparse.ArgumentParser(
         description='Retail Trends Analyzer - Analyze retail sales data and identify trends'
     )

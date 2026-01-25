@@ -7,6 +7,7 @@ import unittest
 import os
 import json
 import csv
+import tempfile
 from datetime import datetime
 from retail_trends import RetailData, RetailTrendsAnalyzer
 
@@ -39,8 +40,8 @@ class TestRetailTrendsAnalyzer(unittest.TestCase):
         self.analyzer = RetailTrendsAnalyzer()
         
         # Create a temporary CSV file for testing
-        self.test_csv_file = '/tmp/test_data.csv'
-        with open(self.test_csv_file, 'w', newline='') as f:
+        csv_fd, self.test_csv_file = tempfile.mkstemp(suffix='.csv')
+        with os.fdopen(csv_fd, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['date', 'product', 'category', 'quantity', 'revenue'])
             writer.writerow(['2024-01-15', 'Laptop', 'Electronics', '2', '2400.00'])
@@ -50,13 +51,13 @@ class TestRetailTrendsAnalyzer(unittest.TestCase):
             writer.writerow(['2024-02-16', 'Jacket', 'Clothing', '2', '200.00'])
         
         # Create a temporary JSON file for testing
-        self.test_json_file = '/tmp/test_data.json'
+        json_fd, self.test_json_file = tempfile.mkstemp(suffix='.json')
         test_json_data = [
             {"date": "2024-01-15", "product": "Laptop", "category": "Electronics", "quantity": 2, "revenue": 2400.00},
             {"date": "2024-01-16", "product": "T-Shirt", "category": "Clothing", "quantity": 5, "revenue": 125.00},
             {"date": "2024-01-17", "product": "Coffee Maker", "category": "Appliances", "quantity": 1, "revenue": 89.99}
         ]
-        with open(self.test_json_file, 'w') as f:
+        with os.fdopen(json_fd, 'w') as f:
             json.dump(test_json_data, f)
     
     def tearDown(self):
