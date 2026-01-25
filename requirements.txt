@@ -1,0 +1,8 @@
+# Retail Trends Analyzer - Python Dependencies
+# This project uses only Python standard libraries
+# No external dependencies required for core functionality
+
+# For development and testing (optional):
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=4.0.0
