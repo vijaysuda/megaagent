@@ -9,7 +9,7 @@ import json
 import csv
 import tempfile
 from datetime import datetime
-from retail_trends import RetailData, RetailTrendsAnalyzer
+from retail_trends import RetailData, RetailTrendsAnalyzer, get_git_info
 
 
 class TestRetailData(unittest.TestCase):
@@ -145,6 +145,20 @@ class TestRetailTrendsAnalyzer(unittest.TestCase):
         """Test report generation with no data."""
         report = self.analyzer.generate_summary_report()
         self.assertEqual(report, "No data available for analysis.")
+
+
+class TestGitInfo(unittest.TestCase):
+    """Test cases for git info functionality."""
+    
+    def test_get_git_info(self):
+        """Test git info retrieval."""
+        git_info = get_git_info()
+        self.assertIsInstance(git_info, str)
+        # Should contain either git info or error message
+        self.assertTrue(
+            "GIT REPOSITORY INFORMATION" in git_info or 
+            "Error:" in git_info
+        )
 
 
 if __name__ == '__main__':

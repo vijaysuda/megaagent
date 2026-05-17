@@ -8,6 +8,7 @@ A comprehensive tool for analyzing retail sales data and identifying trends.
 import argparse
 import json
 import csv
+import subprocess
 from datetime import datetime
 from typing import List, Dict, Tuple
 from collections import defaultdict
@@ -192,6 +193,64 @@ class RetailTrendsAnalyzer:
         return "\n".join(report)
 
 
+def get_git_info() -> str:
+    """Get git commit information for the repository."""
+    try:
+        # Get current user info
+        user_name = subprocess.check_output(
+            ['git', 'config', 'user.name'],
+            stderr=subprocess.DEVNULL
+        ).decode('utf-8').strip()
+        
+        user_email = subprocess.check_output(
+            ['git', 'config', 'user.email'],
+            stderr=subprocess.DEVNULL
+        ).decode('utf-8').strip()
+        
+        # Get recent commits
+        commit_log = subprocess.check_output(
+            ['git', 'log', '--format=%h|%an|%ae|%ad|%s', '--date=iso', '-5'],
+            stderr=subprocess.DEVNULL
+        ).decode('utf-8').strip()
+        
+        # Format the output
+        output = []
+        output.append("=" * 70)
+        output.append("GIT REPOSITORY INFORMATION")
+        output.append("=" * 70)
+        output.append("")
+        output.append(f"Connected User: {user_name} <{user_email}>")
+        output.append("")
+        output.append("-" * 70)
+        output.append("RECENT COMMITS")
+        output.append("-" * 70)
+        output.append("")
+        
+        for line in commit_log.split('\n'):
+            if line:
+                parts = line.split('|')
+                if len(parts) >= 5:
+                    commit_hash = parts[0]
+                    author = parts[1]
+                    email = parts[2]
+                    date = parts[3]
+                    message = parts[4]
+                    output.append(f"Commit: {commit_hash}")
+                    output.append(f"Author: {author} <{email}>")
+                    output.append(f"Date:   {date}")
+                    output.append(f"Message: {message}")
+                    output.append("")
+        
+        output.append("=" * 70)
+        return "\n".join(output)
+        
+    except subprocess.CalledProcessError:
+        return "Error: Not a git repository or git is not installed."
+    except FileNotFoundError:
+        return "Error: Git command not found. Please install git."
+
+
+
 def main():
     """Main function to run the retail trends analyzer."""
     parser = argparse.ArgumentParser(
@@ -199,6 +258,7 @@ def main():
     )
     parser.add_argument(
         'input_file',
+        nargs='?',
         help='Input data file (CSV or JSON format)'
     )
     parser.add_argument(
@@ -211,8 +271,22 @@ def main():
         '--output',
         help='Output file for the report (optional, prints to console if not specified)'
     )
+    parser.add_argument(
+        '--git-info',
+        action='store_true',
+        help='Show git repository information (connected user and recent commits)'
+    )
     
     args = parser.parse_args()
+    
+    # Handle git info request
+    if args.git_info:
+        print(get_git_info())
+        return 0
+    
+    # Require input file if not showing git info
+    if not args.input_file:
+        parser.error('the following arguments are required: input_file (unless using --git-info)')
     
     # Create analyzer and load data
     analyzer = RetailTrendsAnalyzer()

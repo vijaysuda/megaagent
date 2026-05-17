@@ -10,6 +10,7 @@ A powerful Python tool for analyzing retail sales data and identifying trends in
 - 📉 **Growth Rate Calculation**: Track revenue growth over time
 - 📋 **Detailed Reports**: Generate comprehensive summary reports
 - 💻 **CLI Interface**: Easy-to-use command-line interface
+- 🔍 **Git Integration**: View connected user and commit history
 
 ## Installation
 
@@ -44,7 +45,7 @@ python retail_trends.py sample_data.json --format json
 ### Command-Line Options
 
 ```
-usage: retail_trends.py [-h] [--format {csv,json}] [--output OUTPUT] input_file
+usage: retail_trends.py [-h] [--format {csv,json}] [--output OUTPUT] [--git-info] [input_file]
 
 Retail Trends Analyzer - Analyze retail sales data and identify trends
 
@@ -55,6 +56,7 @@ optional arguments:
   -h, --help           show this help message and exit
   --format {csv,json}  Input file format (default: csv)
   --output OUTPUT      Output file for the report (optional, prints to console if not specified)
+  --git-info           Show git repository information (connected user and recent commits)
 ```
 
 ### Examples
@@ -72,6 +74,11 @@ python retail_trends.py sample_data.json --format json
 3. **Save report to file**:
 ```bash
 python retail_trends.py sample_data.csv --output report.txt
+```
+
+4. **Show git repository information**:
+```bash
+python retail_trends.py --git-info
 ```
 
 ## Data Format
