@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2024-01-15",
+    "product": "Laptop",
+    "category": "Electronics",
+    "quantity": 2,
+    "revenue": 2400.00
+  },
+  {
+    "date": "2024-01-16",
+    "product": "T-Shirt",
+    "category": "Clothing",
+    "quantity": 5,
+    "revenue": 125.00
+  },
+  {
+    "date": "2024-01-17",
+    "product": "Coffee Maker",
+    "category": "Appliances",
+    "quantity": 1,
+    "revenue": 89.99
+  },
+  {
+    "date": "2024-01-18",
+    "product": "Smartphone",
+    "category": "Electronics",
+    "quantity": 3,
+    "revenue": 2700.00
+  },
+  {
+    "date": "2024-01-19",
+    "product": "Jeans",
+    "category": "Clothing",
+    "quantity": 4,
+    "revenue": 180.00
+  },
+  {
+    "date": "2024-01-20",
+    "product": "Tablet",
+    "category": "Electronics",
+    "quantity": 2,
+    "revenue": 1200.00
+  },
+  {
+    "date": "2024-01-21",
+    "product": "Sneakers",
+    "category": "Footwear",
+    "quantity": 3,
+    "revenue": 240.00
+  },
+  {
+    "date": "2024-01-22",
+    "product": "Blender",
+    "category": "Appliances",
+    "quantity": 2,
+    "revenue": 150.00
+  },
+  {
+    "date": "2024-01-23",
+    "product": "Headphones",
+    "category": "Electronics",
+    "quantity": 4,
+    "revenue": 400.00
+  },
+  {
+    "date": "2024-01-24",
+    "product": "Dress",
+    "category": "Clothing",
+    "quantity": 2,
+    "revenue": 120.00
+  }
+]
